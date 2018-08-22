@@ -20,10 +20,7 @@ def hello_world():
         pr_number = payload['number']
         pr = repo.get_pull(pr_number)
         pr.as_issue().create_comment('This is good')
-        while 1:
-            time.sleep(1)
-            if pr.mergeable:
-                pr.merge()
-                return ''
+        pr.merge()
+        return ''
 
     return 'Hello, World!'
