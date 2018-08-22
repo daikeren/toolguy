@@ -14,13 +14,14 @@ g = Github(GITHUB_ACCESS_TOKEN)
 
 @app.route('/', methods=["GET", "POST"])
 def hello_world():
-    payload = json.loads(request.data)
-    if payload['action'] == 'opened' or payload['action'] == 'reopened':
-        repo = g.get_repo(payload['repository']['id'])
-        pr_number = payload['number']
-        pr = repo.get_pull(pr_number)
-        pr.as_issue().create_comment('This is good')
-        pr.merge()
-        return ''
+    if request.method == 'POST':
+        payload = json.loads(request.data)
+        if payload['action'] == 'opened' or payload['action'] == 'reopened':
+            repo = g.get_repo(payload['repository']['id'])
+            pr_number = payload['number']
+            pr = repo.get_pull(pr_number)
+            pr.as_issue().create_comment('This is good')
+            pr.merge()
+            return ''
 
     return 'Hello, World!'
