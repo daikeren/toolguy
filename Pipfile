@@ -7,6 +7,7 @@ name = "pypi"
 pygithub = "*"
 flask = "*"
 ipython = "*"
+gunicorn = "*"
 
 [dev-packages]
 
