@@ -15,7 +15,7 @@ github = Github(GITHUB_ACCESS_TOKEN)
 def hello_world():
     if request.method == 'POST':
         payload = json.loads(request.data)
-        if payload['action'] == 'opened' or payload['action'] == 'reopened':
+        if payload['action'] and (payload['action'] == 'opened' or payload['action'] == 'reopened'):
             repo = github.get_repo(payload['repository']['id'])
             pr_number = payload['number']
             pr = repo.get_pull(pr_number)
